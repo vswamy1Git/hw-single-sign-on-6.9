@@ -21,6 +21,11 @@ gem 'jquery-rails'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+
+gem 'omniauth-rails_csrf_protection'  # protects against recently discovered vulnerability
+gem 'omniauth'                        # flexible, multi-provider authentication library
+gem 'omniauth-github'                 # omniauth strategy for provider github
+gem 'figaro'                          # keeps our secrets safe
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -42,7 +47,10 @@ group :development, :test do
   gem 'capybara', '2.4.4'
   gem 'launchy'
   gem 'rspec-rails', '3.7.2'
-  gem 'ZenTest', '4.11.2'  
+  gem 'ZenTest', '4.11.2'
+  #gem 'factory_girl'
+  gem 'factory_girl_rails'
+  #gem 'factory_bot'
 end
 
 group :development do
