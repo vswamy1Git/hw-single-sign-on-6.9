@@ -22,6 +22,9 @@ module NavigationHelpers
      when /^the RottenPotatoes edit Profile Path for "([^"]*)"$/
       edit_user_profile_path(1, 2) 
 
+     when /^the RottenPotatoes Home Page$/
+      movies_path
+      
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

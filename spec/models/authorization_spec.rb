@@ -13,6 +13,7 @@ RSpec.describe Authorization, type: :model do
       it 'creates an Authorization with a provider' do
         expect(auth.provider).to eq("github")
         
+       
       end
       it 'creates an Authorization with a uid' do
         expect(auth.uid).to eq('123456') 
@@ -20,6 +21,31 @@ RSpec.describe Authorization, type: :model do
       it 'creates an Authorization with a user_id' do
         expect(auth.user_id).to eq(user.id)
       end
+    end
+    context 'a previous authorization exists' do
+      before(:each) do
+        user =  User.create!(name: 'SUNY Tester', email: 'stester@binghamton.edu')
+        @auth = Authorization.create!(provider: "github", uid: "123456", user_id: user.id)
+        p @auth
+      end 
+      it "exists" do
+        expect(Authorization.exists?(OmniAuth.config.mock_auth[:github])).to eq(true)
+      end
+      it "can recover the previous authorization" do
+        expect(Authorization.find_with_auth_hash(OmniAuth.config.mock_auth[:github])).to eq(@auth)
+      end
+    end
+    context 'a previous authorization does not exist' do
+      before(:each) do
+        user =  User.create!(name: 'Other Tester', email: 'otester@binghamton.edu')
+        @auth = Authorization.create!(provider: "github", uid: "654321", user_id: user.id)
+      end 
+      it "does not exist" do 
+        expect(Authorization.exists?(OmniAuth.config.mock_auth[:github])).to eq(false)
+      end
+      it "can't recover a previous authorization that does not exist" do
+         expect(Authorization.find_with_auth_hash(OmniAuth.config.mock_auth[:github][:info])).to eq(nil)
+        end 
     end
     context 'it creates an invalid Authorization' do
       let(:user) {User.new}

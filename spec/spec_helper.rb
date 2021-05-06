@@ -14,9 +14,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'omniauth'
-require 'factory_girl'
 require 'factory_girl_rails'
-
 
 OmniAuth.config.test_mode = true
 omniauth_hash = { 'provider' => 'github',
@@ -38,7 +36,7 @@ RSpec.configure do |config|
   # assertions if you prefer.
   config.before(:each) do
     Rails.application.load_seed # loading seeds
-  end  
+  end
   
   config.include FactoryGirl::Syntax::Methods 
   config.expect_with :rspec do |expectations|
