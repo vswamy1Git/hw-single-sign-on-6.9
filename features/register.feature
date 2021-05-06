@@ -16,7 +16,7 @@ Background: profiles in databasea
 @omniauth_test1
 Scenario: Register
   Given I am on the RottenPotatoes Landing Page
-  And I press "Register with GitHub"
+  And I press "Register or Login with GitHub" 
   And I should see "Welcome Tester SUNY! You have signed up via github."
   And I should see "Editing profile" 
   
@@ -24,5 +24,5 @@ Scenario: Register
 @omniauth_test2
 Scenario:  Can't Register without SUNY ID
   Given I am on the RottenPotatoes Landing Page
-  And I press "Register with GitHub"
+  And I press "Register or Login with GitHub"
   And I should see "ActiveRecord::RecordInvalid: Validation failed: Email must be for Binghamton University"
